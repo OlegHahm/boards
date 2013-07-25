@@ -31,6 +31,8 @@ void maca_set_power ( uint8_t power );
 void maca_set_channel ( uint8_t channel );
 uint16_t maca_set_address ( uint16_t addr );
 uint16_t maca_get_address ( void );
+uint16_t maca_set_pan ( uint16_t pan );
+uint16_t maca_get_pan ( void );
 
 /* get Link Quality Indicator */
 extern uint8_t (*get_lqi) ( void );

@@ -914,6 +914,23 @@ uint16_t maca_get_address ( void ) {
     return MACA->MAC16ADDR;
 }
 
+uint16_t maca_set_pan ( uint16_t pan ) {
+    safe_irq_disable ( INT_NUM_MACA );
+    
+    MACA->MACPANIDbits.PANID = pan;
+    
+    irq_restore ();
+    
+    if ( ITC->NIPENDbits.MACA ) {
+        ITC->INTFRCbits.MACA = 1;
+    }
+    return MACA->MACPANIDbits.PANID;
+}
+
+uint16_t maca_get_pan ( void ) {
+    return MACA->MACPANIDbits.PANID;
+}
+
 #define MACA_ROM_END 0x0013ffff
 #define MACA_ENTRY_EOF 0x00000e0f
 uint32_t _exec_init_entry ( volatile uint32_t *entries, uint8_t *value_buffer ) {
