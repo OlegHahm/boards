@@ -36,21 +36,16 @@
 /* LEDs ports MSB430 */
 #define LEDS_PxDIR P5DIR
 #define LEDS_PxOUT P5OUT
-#define LEDS_CONF_RED		0x10
-#define LEDS_CONF_GREEN		0x20
-#define LEDS_CONF_BLUE	0x40
+#define LEDS_CONF_RED		(0x10)
+#define LEDS_CONF_GREEN		(0x20)
+#define LEDS_CONF_BLUE	    (0x40)
+#define LEDS_CONF_0         (LEDS_CONF_RED)
+#define LEDS_CONF_1         (LEDS_CONF_GREEN)
+#define LEDS_CONF_2         (LEDS_CONF_BLUE)
 
-#define LED_RED_ON      LEDS_PxOUT &=~LEDS_CONF_RED
-#define LED_RED_OFF     LEDS_PxOUT |= LEDS_CONF_RED
-#define LED_RED_TOGGLE     LEDS_PxOUT ^= LEDS_CONF_RED
-
-#define LED_GREEN_ON      LEDS_PxOUT &=~LEDS_CONF_GREEN
-#define LED_GREEN_OFF     LEDS_PxOUT |= LEDS_CONF_GREEN
-#define LED_GREEN_TOGGLE     LEDS_PxOUT ^= LEDS_CONF_GREEN
-
-#define LED_BLUE_ON      LEDS_PxOUT &=~LEDS_CONF_BLUE
-#define LED_BLUE_OFF     LEDS_PxOUT |= LEDS_CONF_BLUE
-#define LED_BLUE_TOGGLE     LEDS_PxOUT ^= LEDS_CONF_BLUE
+#define LED_ON(led_color)       (LEDS_PxOUT &= ~LEDS_CONF_##led_color)
+#define LED_OFF(led_color)      (LEDS_PxOUT |= LEDS_CONF_##led_color)
+#define LED_TOGGLE(led_color)   (LEDS_PxOUT ^= LEDS_CONF_##led_color)
 
 #include <stdint.h>
 #include <msp430x16x.h>

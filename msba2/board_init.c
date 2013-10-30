@@ -41,13 +41,13 @@ void loop_delay(void)
 
 void bl_blink(void)
 {
-    LED_RED_ON;
-    LED_GREEN_ON;
+    LED_ON(RED);
+    LED_ON(RED);
 
     loop_delay();
 
-    LED_RED_OFF;
-    LED_GREEN_OFF;
+    LED_OFF(RED);
+    LED_OFF(RED);
 }
 
 void bl_init_ports(void)
@@ -59,10 +59,10 @@ void bl_init_ports(void)
     PINSEL0 &= ~(BIT5 + BIT7);
 
     /* LEDS */
-    FIO3DIR |= LED_RED_PIN;
-    FIO3DIR |= LED_GREEN_PIN;
-    LED_RED_OFF;
-    LED_GREEN_OFF;
+    FIO3DIR |= LED_PIN_RED;
+    FIO3DIR |= LED_PIN_GREEN;
+    LED_OFF(RED);
+    LED_OFF(RED);
 
     /* short blinking of both of the LEDs on startup */
     bl_blink();

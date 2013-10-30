@@ -222,7 +222,7 @@ void board_init()
     msp430_cpu_init();
     msb_ports_init();
 
-    LED_RED_ON;
+    LED_ON(RED);
 
     msp430_set_cpu_speed(7372800uL);
 }

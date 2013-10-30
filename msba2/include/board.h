@@ -4,16 +4,14 @@
 #include "msba2_common.h"
 #include "bitarithm.h"
 
-#define LED_RED_PIN (BIT25)
-#define LED_GREEN_PIN (BIT26)
+#define LED_PIN_GREEN   (BIT25)
+#define LED_PIN_RED     (BIT26)
+#define LED_PIN_0       (LED_PIN_RED)
+#define LED_PIN_1       (LED_PIN_GREEN)
 
-#define LED_GREEN_OFF (FIO3SET = LED_GREEN_PIN)
-#define LED_GREEN_ON (FIO3CLR = LED_GREEN_PIN)
-#define LED_GREEN_TOGGLE (FIO3PIN ^= LED_GREEN_PIN)
-
-#define LED_RED_OFF (FIO3SET = LED_RED_PIN)
-#define LED_RED_ON (FIO3CLR = LED_RED_PIN)
-#define LED_RED_TOGGLE (FIO3PIN ^= LED_RED_PIN)
+#define LED_ON(led_color)       (FIO3SET = LED_PIN_##led_color)
+#define LED_OFF(led_color)      (FIO3CLR = LED_PIN_##led_color)
+#define LED_TOGGLE(led_color)   (FIO3PIN ^= LED_PIN_##led_color)
 
 void init_clks1(void);
 
