@@ -82,8 +82,8 @@ void usart1irq(void);
  */
 interrupt(USART1RX_VECTOR) usart1irq(void)
 {
+    __enter_isr();
     int c = 0;
-
     /* Check status register for receive errors. */
     if (U1RCTL & RXERR) {
         if (U1RCTL & FE) {
@@ -112,7 +112,7 @@ interrupt(USART1RX_VECTOR) usart1irq(void)
         uart0_handle_incoming(c);
         uart0_notify_thread();
     }
-
 #endif
+    __exit_isr();
 }
 
